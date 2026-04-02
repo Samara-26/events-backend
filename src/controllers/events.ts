@@ -2,7 +2,7 @@ import type { RequestHandler } from "express";
 import { Event } from "#models";
 import { json } from "node:stream/consumers";
 
-const getEvents: RequestHandler = async (req, res) => {
+export const getEvents: RequestHandler = async (req, res) => {
     try {
         const events = await Event.find();
         res.json(events);
@@ -10,7 +10,15 @@ const getEvents: RequestHandler = async (req, res) => {
         res.status(500).json({ error: 'failed to fetch events' });
     }
 };
-const postEvent: RequestHandler = async () => { };
-const putEvent: RequestHandler = async () => { };
-const patchEvents: RequestHandler = async () => { };
-const deleteEvents: RequestHandler = async () => { };
+export const createEvent: RequestHandler = async (req, res) => {
+    try {
+        const event = await Event.create(req.body);
+        res.json(event);
+    } catch (error) {
+        res.status(500).json({ error: 'failed to create event' });
+    }
+};
+export const putEvent: RequestHandler = async () => { };
+export const patchEvents: RequestHandler = async () => { };
+export const deleteEvents: RequestHandler = async () => { };
+
