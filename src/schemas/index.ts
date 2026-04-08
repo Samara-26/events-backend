@@ -1,0 +1,1 @@
+export { default as eventInputSchema } from './event.ts';

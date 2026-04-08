@@ -1,10 +1,11 @@
 import type { RequestHandler } from "express";
 import { Event } from "#models";
-import { json } from "node:stream/consumers";
+import { log } from "console";
 
 export const getEvents: RequestHandler = async (req, res) => {
     try {
-        const events = await Event.find();
+        const events =
+            await Event.find().populate('createdBy', 'name email');
         res.json(events);
     } catch (error) {
         res.status(500).json({ error: 'failed to fetch events' });
@@ -13,8 +14,9 @@ export const getEvents: RequestHandler = async (req, res) => {
 export const createEvent: RequestHandler = async (req, res) => {
     try {
         const event = await Event.create(req.body);
-        res.json(event);
+        res.status(201).json(event);
     } catch (error) {
+        console.error(error);
         res.status(500).json({ error: 'failed to create event' });
     }
 };
