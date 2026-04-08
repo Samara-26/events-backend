@@ -12,21 +12,29 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "imports": {
+    "#controller": {
+      "development": "./src/controller/index.ts",
+      "default": "./dist/controller/index.js"
+    },
     "#db": {
       "development": "./src/db/index.ts",
       "default": "./dist/db/index.js"
+    },
+    "#middleware": {
+      "development": "./src/middleware/index.ts",
+      "default": "./dist/middleware/index.js"
+    },
+    "#model": {
+      "development": "./src/model/index.ts",
+      "default": "./dist/model/index.js"
     },
     "#routes": {
       "development": "./src/routes/index.ts",
       "default": "./dist/routes/index.js"
     },
-    "#models": {
-      "development": "./src/models/index.ts",
-      "default": "./dist/models/index.js"
-    },
-    "#controllers": {
-      "development": "./src/controllers/index.ts",
-      "default": "./dist/controllers/index.js"
+    "#schemas": {
+      "development": "./src/schemas/index.ts",
+      "default": "./dist/schemas/index.js"
     }
   },
   "keywords": [],

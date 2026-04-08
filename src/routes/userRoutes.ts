@@ -1,8 +1,12 @@
 import { Router } from 'express';
-import { createUser, getUsers } from '#controllers';
+import { createUser, getUsers } from '#controller';
+import { validateBody } from '#middleware';
+import { UserInputSchema } from '#schemas';
 
 const userRoutes = Router();
-userRoutes.post('/', createUser);
-userRoutes.get('/', getUsers);
+userRoutes
+    .route('/')
+    .get(getUsers)
+    .post(validateBody(UserInputSchema), createUser);//middleware
 
 export default userRoutes;
