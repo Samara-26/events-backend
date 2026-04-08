@@ -1,8 +1,17 @@
 import { Router } from "express";
-import { createEvent, getEvents } from '#controllers';
+import { createEvent, deleteEvent, getEvent, getEvents } from '#controller';
+import { validateBody } from "#middleware";
+import { EventInputSchema } from "#schemas";
 
 const eventRoutes = Router();
-eventRoutes.get('/', getEvents);
-eventRoutes.post('/', createEvent);
+
+eventRoutes
+    .route('/')
+    .get(getEvents)
+    .post(validateBody(EventInputSchema), createEvent); //middleware
+eventRoutes
+    .route('/:id')
+    .get(getEvent)
+    .delete(deleteEvent);
 
 export default eventRoutes;
